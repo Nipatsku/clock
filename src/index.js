@@ -23,8 +23,12 @@ const getDigit = ( timeValue, i ) => {
  * @return  10 | 5 | false
  */
 const getDividable = ( numbers ) => {
-    const sum = numbers.reduce((prev, cur) => prev + cur, 0)
-    return sum % 10 === 0 ? 10 : sum % 5 === 0 ? 5 : false
+    const sum = numbers.reduce((prev, cur) => prev + Number(cur), 0)
+    return sum % 10 === 0 ?
+        10 :
+        sum % 5 === 0 ?
+            5 :
+            false
 }
 
 const rand = (arrayOrMin, max) => {
@@ -106,7 +110,7 @@ const Clock = (opts) => {
     } else if ( opts.font === 'irregular' ) {
         let iFont
         updateFunc = overrideFunc(updateFunc, (iCycle) => {
-            if ( iCycle % 10 !== 0 ) return
+            if ( new Date().getSeconds() !== 0 && iFont ) return
             let nextIndex
             for ( let attempt = 0; attempt <= 50; attempt ++ ) {
                 nextIndex = rand(coolFonts)
